@@ -8,11 +8,20 @@ pipeline {
   }
 
   stages {
-    stage('Running test') {
-      steps {
-        container('katalon') {
-            sh 'katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
-        }
+    stage('Run Tests') {
+      parallel {
+          stage('Chrome') {
+            container('katalon-chrome') {
+               sh 'katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
+            }
+          }
+          stage('Firefox') {
+            steps {
+              container('katalon-firefox') {
+                sh 'katalon-execute.sh -browserType="Firefox" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_RegressionTest"'
+              }
+            } 
+          }
       }
     }
   }

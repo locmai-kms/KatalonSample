@@ -25,4 +25,4 @@ WebUI.sendKeys(findTestObject('Object Repository/LoginPage/passwordTxt'), Global
 
 WebUI.click(findTestObject('Object Repository/LoginPage/loginBtn'))
 
-WebUI.verifyEqual("Login -- Saleor Demo", WebUI.getWindowTitle())
+WebUI.verifyEqual("Login --	 Saleor Demo", WebUI.getWindowTitle())
